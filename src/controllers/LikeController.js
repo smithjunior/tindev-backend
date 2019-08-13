@@ -2,7 +2,6 @@ const Dev = require('../models/Dev')
 
 module.exports = {
   async store (request, response) {
-
     const { user } = request.headers
     const { devId } = request.params
 
