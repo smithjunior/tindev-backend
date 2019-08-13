@@ -1,12 +1,13 @@
+require('dotenv').config()
+
 const mongoose = require('mongoose')
 
-mongoose.connect('mongodb+srv://omnistack8_tindev:omnistack8_tindev@cluster0-45kku.mongodb.net/omnistack8_tindev?retryWrites=true&w=majority', { useNewUrlParser: true })
+mongoose.connect(process.env.MONGO_CONNECTION, { useNewUrlParser: true })
 
 const cors = require('cors')
 
 const express = require('express')
 const routes = require('./routes')
-
 const app = express()
 
 const server = require('http').Server(app)
@@ -30,4 +31,4 @@ app.use(cors())
 app.use(express.json())
 app.use(routes)
 
-server.listen(3333)
+server.listen(process.env.PORT || 3333)
