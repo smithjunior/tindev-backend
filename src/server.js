@@ -1,12 +1,8 @@
 require('dotenv').config()
 
-const mongoose = require('mongoose')
-
-mongoose.connect(process.env.MONGO_CONNECTION, { useNewUrlParser: true })
-
-const cors = require('cors')
-
 const express = require('express')
+const mongoose = require('mongoose')
+const cors = require('cors')
 const routes = require('./routes')
 const app = express()
 
@@ -19,8 +15,9 @@ const connectDevs = {}
 io.on('connection', socket => {
   const { dev } = socket.handshake.query
   connectDevs[dev] = socket.id
-  console.log(connectDevs)
 })
+
+mongoose.connect(process.env.MONGO_CONNECTION, { useNewUrlParser: true })
 
 app.use((request, response, next) => {
   request.io = io
