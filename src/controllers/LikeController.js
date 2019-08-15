@@ -19,7 +19,7 @@ module.exports = {
         request.io.to(loggedSocket).emit('match', targetDev)
       }
       if (targetSocket) {
-        request.io.to(targetSocket).emit('match', loggedSocket)
+        request.io.to(targetSocket).emit('match', loggedDev)
       }
     }
 
