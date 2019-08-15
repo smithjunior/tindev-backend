@@ -10,18 +10,18 @@ const server = require('http').Server(app)
 
 const io = require('socket.io')(server)
 
-const connectDevs = {}
+const connectedDevs = {}
 
 io.on('connection', socket => {
   const { dev } = socket.handshake.query
-  connectDevs[dev] = socket.id
+  connectedDevs[dev] = socket.id
 })
 
 mongoose.connect(process.env.MONGO_CONNECTION, { useNewUrlParser: true })
 
 app.use((request, response, next) => {
   request.io = io
-  request.connectDevs = connectDevs
+  request.connectedDevs = connectedDevs
   return next()
 })
 app.use(cors())
